@@ -11,15 +11,12 @@ AudioMixerController:
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
+  - {fileID: 5249003020983780709}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters:
-  - guid: 6e00a407a89642790a6a5df30d4ee022
-    name: Pitch
-  - guid: 2d817db497ad464fda7654951c9dc3cb
-    name: Highpass
+  m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
     - 539e681ccc47a4eb38ad85c4b5c399c6
@@ -71,9 +68,24 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: af7b349a2e7e2b6179db0d8f21df3ca4
   m_FloatValues:
-    2d817db497ad464fda7654951c9dc3cb: 0
+    2d817db497ad464fda7654951c9dc3cb: -80
     c175edf4c8bfbbd999997bfefb7af15b: 2671
     6e00a407a89642790a6a5df30d4ee022: 1
+    2e99fb7c1f552cab499540f5a9f4d4be: 1
+  m_TransitionOverrides: {}
+--- !u!245 &5249003020983780709
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Chad
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: c847c3ce87bda5d2baa2cfaa612b3f0e
+  m_FloatValues:
+    2d817db497ad464fda7654951c9dc3cb: 0
+    c175edf4c8bfbbd999997bfefb7af15b: 2671
+    6e00a407a89642790a6a5df30d4ee022: 0.804
     2e99fb7c1f552cab499540f5a9f4d4be: 1
   m_TransitionOverrides: {}
 --- !u!244 &5935855346807165885

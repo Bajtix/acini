@@ -13,7 +13,7 @@ public class AniText : MonoBehaviour {
     }
 
     public virtual void Animate(string text) {
-        if (!isText)
+        if (isText)
             textMeshPro.text = text;
     }
 

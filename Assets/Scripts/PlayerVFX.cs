@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerVFX : MonoBehaviour {
 
+    public Player player;
     public Color chadBgColor;
     public ParticleSystem deathParticles;
 
-    private Player player;
+
     private Color backgroundColor;
 
     private void CameraFX() {

@@ -30,6 +30,7 @@ public class GameUI : MonoBehaviour {
     public void BopHunger() {
         // make the progress bar go [  ] and than return to  []
         hungerBar.GetComponent<AniText>().Animate("");
+        hungerBar.value = hungerTarget;
     }
 
     public void Score(long score) {

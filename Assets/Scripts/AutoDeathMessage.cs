@@ -12,11 +12,4 @@ public class AutoDeathMessage : MonoBehaviour {
         string msg = messages[Random.Range(0, messages.Length)];
         text.text = $"{msg}<br><size=12>SCORE:{GameManager.instance?.score}<br>BEST:{GameManager.instance?.highscore}";
     }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            Time.timeScale = 1;
-            GameManager.instance.LoadGame();
-        }
-    }
 }
