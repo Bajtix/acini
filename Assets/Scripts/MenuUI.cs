@@ -13,7 +13,7 @@ public class MenuUI : MonoBehaviour {
         c.Enable();
 
         c.Default.Return.performed += (_) => LoadGame();
-        c.Default.Return.performed += (_) => Quit();
+        c.Default.Escape.performed += (_) => Quit();
     }
 
     private void OnDisable() {
