@@ -35,4 +35,9 @@ public class GameManager : MonoBehaviour {
         Fade.our.FadeIn();
         gameObject.DelayedInvoke(0.2f, () => SceneManager.LoadScene(1));
     }
+
+    public void LoadMenu() {
+        Fade.our.FadeIn();
+        gameObject.DelayedInvoke(0.2f, () => SceneManager.LoadScene(0));
+    }
 }

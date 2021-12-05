@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc42fa95-b313-4e3f-a2ff-cf158f17535f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -121,11 +130,22 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""49862b61-29a8-4744-b97f-bff9c2ab3499"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""baa31eb1-1f0c-4887-954a-3b602359b970"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -141,6 +161,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Default_Left = m_Default.FindAction("Left", throwIfNotFound: true);
         m_Default_Right = m_Default.FindAction("Right", throwIfNotFound: true);
         m_Default_Return = m_Default.FindAction("Return", throwIfNotFound: true);
+        m_Default_Escape = m_Default.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,6 +226,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Default_Left;
     private readonly InputAction m_Default_Right;
     private readonly InputAction m_Default_Return;
+    private readonly InputAction m_Default_Escape;
     public struct DefaultActions
     {
         private @Controls m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Left => m_Wrapper.m_Default_Left;
         public InputAction @Right => m_Wrapper.m_Default_Right;
         public InputAction @Return => m_Wrapper.m_Default_Return;
+        public InputAction @Escape => m_Wrapper.m_Default_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -238,6 +261,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Return.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnReturn;
                 @Return.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnReturn;
                 @Return.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnReturn;
+                @Escape.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_DefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -257,6 +283,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Return.started += instance.OnReturn;
                 @Return.performed += instance.OnReturn;
                 @Return.canceled += instance.OnReturn;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -268,5 +297,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
         void OnReturn(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

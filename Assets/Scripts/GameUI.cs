@@ -18,10 +18,15 @@ public class GameUI : MonoBehaviour {
     public CanvasGroup deathPanel;
     public Slider hungerBar;
     public AniText scoreText;
-
     public AniText scoreAnnouncer;
 
     private float hungerTarget;
+    private Controls c;
+
+    private void Awake() {
+        c = new Controls();
+    }
+
 
     public void SetHunger(float hunger) {
         hungerTarget = hunger;
@@ -41,6 +46,13 @@ public class GameUI : MonoBehaviour {
     public void Die() {
         deathPanel.gameObject.SetActive(true);
         deathPanel.TweenCanvasGroupAlpha(1, 0.04f).SetFrom(0);
+        c.Enable();
+        c.Default.Return.performed += (_) => ReplayGame();
+        c.Default.Return.performed += (_) => MainMenu();
+    }
+
+    private void OnDisable() {
+        c.Disable();
     }
 
     public void AnnouncePoints(string name, long bonus) {
@@ -52,6 +64,14 @@ public class GameUI : MonoBehaviour {
     private void Update() {
         //update hunger bar
         hungerBar.value = Mathf.Lerp(hungerBar.value, hungerTarget, Time.deltaTime * 10f); //update hunger preview
+    }
+
+    public void ReplayGame() { // TODO: scene loading needs a rework
+        GetComponent<Loader>().StartGame();
+    }
+
+    public void MainMenu() {
+        GetComponent<Loader>().MainMenu();
     }
 
 
