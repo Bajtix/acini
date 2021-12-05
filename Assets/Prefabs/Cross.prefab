@@ -73,7 +73,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 5
   m_Parameters:
     serializedVersion: 3
@@ -283,6 +283,7 @@ MonoBehaviour:
   flashColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 1, g: 0, b: 0.8343153, a: 1}
+  addRotation: 0
 --- !u!114 &3134444348346131217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,8 +299,8 @@ MonoBehaviour:
   speed: 2
   hungerDamage: 0
   scoreDamage: 0
-  hungerReward: 0
-  scoreReward: 200
+  hungerReward: 0.2
+  scoreReward: 250
   aliveTime: 45
   dieOnHit: 0
   particles: {fileID: 3610552363701285131}

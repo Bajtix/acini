@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
     public float hungerDrain = 0.055f;
     public bool isChad = false;
     public PlayerVFX fx;
+    public PlayerCurseWords curse;
 
 
     private Vector2 movementVector = Vector2.zero;
@@ -62,6 +63,7 @@ public class Player : MonoBehaviour {
     public void Damage(float nut) {
         hunger -= nut;
         GameUI.Instance.BopHunger();
+        GameUI.Instance.Announce(curse.Next());
     }
 
     public void Eat(float nut) {

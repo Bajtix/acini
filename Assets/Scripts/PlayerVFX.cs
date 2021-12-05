@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
+using ElRaccoone.Tweens;
 
 public class PlayerVFX : MonoBehaviour {
 
     public Player player;
     public Color chadBgColor;
     public ParticleSystem deathParticles;
+    public AudioMixer mixer;
+    public Cinemachine.CinemachineVirtualCamera cam;
 
 
     private Color backgroundColor;
@@ -20,11 +22,13 @@ public class PlayerVFX : MonoBehaviour {
     }
 
     public void BecomeChad() {
-
+        mixer.FindSnapshot("Chad").TransitionTo(0.5f);
+        gameObject.TweenValueFloat(15, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(10);
     }
 
     public void BecomeVirgin() {
-
+        mixer.FindSnapshot("Default").TransitionTo(0.5f);
+        gameObject.TweenValueFloat(10, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(15);
     }
 
     public void WhileChad(float timer) {

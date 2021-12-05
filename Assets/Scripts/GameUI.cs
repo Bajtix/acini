@@ -48,7 +48,7 @@ public class GameUI : MonoBehaviour {
         deathPanel.TweenCanvasGroupAlpha(1, 0.04f).SetFrom(0);
         c.Enable();
         c.Default.Return.performed += (_) => ReplayGame();
-        c.Default.Return.performed += (_) => MainMenu();
+        c.Default.Escape.performed += (_) => MainMenu();
     }
 
     private void OnDisable() {
@@ -56,8 +56,16 @@ public class GameUI : MonoBehaviour {
     }
 
     public void AnnouncePoints(string name, long bonus) {
+        Announce($"{name}<br><align=\"right\"><size=22>{bonus}x");
+    }
+
+    public void AnnounceBooster(string name, float bonus) {
+        Announce($"{name}<br><align=\"right\"><size=22>{(bonus > 0 ? "+" : "-")}{bonus}");
+    }
+
+    public void Announce(string text) {
         var txt = Instantiate(scoreAnnouncer.gameObject, transform).GetComponent<AniText>();
-        txt.Animate($"{name}<br><align=\"right\"><size=22>{bonus}x");
+        txt.Animate(text);
         Destroy(txt, 5f);
     }
 

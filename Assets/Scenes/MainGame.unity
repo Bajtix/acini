@@ -6017,7 +6017,7 @@ MonoBehaviour:
   spawnEntries:
   - spawnDelay: 0
     interval: 0.25
-    objectToSpawn: {fileID: 2665368406022417305, guid: 9fba5611a030aba49b654f79369359d3, type: 3}
+    objectToSpawn: {fileID: 2665368406022417305, guid: 9fb2df4198db1f4e4a42d03798cb7479, type: 3}
   - spawnDelay: 10
     interval: 1
     objectToSpawn: {fileID: 8748112494839733914, guid: b27e8847c9641b0a78f054cd85cbc5aa, type: 3}
@@ -6027,15 +6027,21 @@ MonoBehaviour:
   - spawnDelay: 25
     interval: 10
     objectToSpawn: {fileID: 8748112494839733914, guid: d14dc63e8f9a475c0ab4cb52026c6d2c, type: 3}
+  - spawnDelay: 30
+    interval: 5
+    objectToSpawn: {fileID: 2665368406022417305, guid: 2542aebcd92e90ab4ac6dff8d9224516, type: 3}
   - spawnDelay: 45
     interval: 10
     objectToSpawn: {fileID: 8748112494839733914, guid: d14dc63e8f9a475c0ab4cb52026c6d2c, type: 3}
   - spawnDelay: 50
     interval: 0.25
-    objectToSpawn: {fileID: 2665368406022417305, guid: 9fba5611a030aba49b654f79369359d3, type: 3}
+    objectToSpawn: {fileID: 2665368406022417305, guid: 9fb2df4198db1f4e4a42d03798cb7479, type: 3}
   - spawnDelay: 55
     interval: 1
     objectToSpawn: {fileID: 8748112494839733914, guid: b27e8847c9641b0a78f054cd85cbc5aa, type: 3}
+  - spawnDelay: 55
+    interval: 15
+    objectToSpawn: {fileID: 2665368406022417305, guid: 9fba5611a030aba49b654f79369359d3, type: 3}
   spawnRange: 50
 --- !u!4 &614438772
 Transform:
@@ -11679,6 +11685,7 @@ GameObject:
   - component: {fileID: 1767925985}
   - component: {fileID: 1767925986}
   - component: {fileID: 1767925987}
+  - component: {fileID: 1767925988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11705,6 +11712,7 @@ MonoBehaviour:
   hungerDrain: 0.055
   isChad: 0
   fx: {fileID: 1767925986}
+  curse: {fileID: 1767925988}
 --- !u!212 &1767925982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11828,6 +11836,8 @@ MonoBehaviour:
   player: {fileID: 1767925981}
   chadBgColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
   deathParticles: {fileID: 206033302}
+  mixer: {fileID: 24100000, guid: 1265ce2fdfd0c75b39eaa66a6ce34921, type: 2}
+  cam: {fileID: 145193380}
 --- !u!114 &1767925987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11841,6 +11851,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1767925981}
+--- !u!114 &1767925988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767925980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a629ee25bb6b228387a40ae79c77e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curses:
+  - fuck
+  - shit
+  - for fucks sake
+  - i hate this
+  - ouch
+  - awch UwU
 --- !u!1 &1901959916
 GameObject:
   m_ObjectHideFlags: 0
