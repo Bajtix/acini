@@ -1,24 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using ElRaccoone.Tweens;
 using UnityEngine;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class Fade : MonoBehaviour
-{
+public class Fade : MonoBehaviour {
+    public static Fade our; // simplified not-really singleton thing
 
-    public static Fade our;
+    public float fadeDuration = 0.2f;
+    private CanvasGroup cg;
 
-    private void Start()
-    {
+    private void Start() {
         our = this;
-        GetComponent<CanvasGroup>().alpha = 1;
-        LeanTween.alphaCanvas(GetComponent<CanvasGroup>(), 0, 0.2f).setOnComplete(() => gameObject.SetActive(false));
+        cg = GetComponent<CanvasGroup>();
+
+        FadeOut();
     }
 
-    public void FadeIn()
-    {
+    public void FadeIn() {
         gameObject.SetActive(true);
-        GetComponent<CanvasGroup>().alpha = 0;
-        LeanTween.alphaCanvas(GetComponent<CanvasGroup>(), 1, 0.2f);
+
+        cg.alpha = 0;
+        cg.TweenCanvasGroupAlpha(1, fadeDuration);
+    }
+
+    public void FadeOut() {
+        gameObject.SetActive(true);
+
+        cg.alpha = 1;
+        cg.TweenCanvasGroupAlpha(0, fadeDuration).SetOnComplete(() => gameObject.SetActive(false));
     }
 }

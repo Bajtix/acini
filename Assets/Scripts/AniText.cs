@@ -1,24 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
+using ElRaccoone.Tweens;
 using TMPro;
 using UnityEngine;
 
-public class AniText : MonoBehaviour
-{
+public class AniText : MonoBehaviour {
     public bool enableDissapear = false;
     private float dissappear = 0;
-    public void Text(string text, float maxDuration = 1)
-    {
-        GetComponent<TextMeshProUGUI>().text = text;
-        dissappear = maxDuration;
-        LeanTween.scale(gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.05f).setOnComplete(() => LeanTween.scale(gameObject, new Vector3(1f, 1f, 1f), 0.05f));
+
+    private TextMeshProUGUI textMeshPro;
+
+    private void Start() {
+        textMeshPro = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Update()
-    {
+    public void Text(string text, float maxDuration = 1) {
+        textMeshPro.text = text;
+        dissappear = maxDuration;
+
+        gameObject.TweenLocalScale(new Vector3(1.2f, 1.2f, 1.2f), 0.05f).SetOnComplete(() => {
+            gameObject.TweenLocalScale(Vector3.one, 0.05f);
+        });
+    }
+
+    public string GetText() {
+        return textMeshPro.text;
+    }
+
+    private void Update() {
         dissappear -= Time.deltaTime;
-        if (dissappear <= 0 && enableDissapear)
-        {
+        if (dissappear <= 0 && enableDissapear) {
             GetComponent<TextMeshProUGUI>().text = "";
         }
     }

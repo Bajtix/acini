@@ -4,15 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 //this code is fucking cursed
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
     public long score = 0;
     public float speed = 5f;
     public float hunger = 1f;
     public bool alive = true;
     public float hungerSpeed = 0.01f;
-
-    public float cameraZoomFX = 100;
     public static Player instance;
 
     public UnityEngine.UI.Slider progressBar;
@@ -44,41 +41,36 @@ public class Player : MonoBehaviour
 
     public AudioMixer mixerGroup;
 
-    public void Chad(float dur)
-    {
+    public void Chad(float dur) {
         chadTimer = dur;
         if (!isChad) BecomeChad();
     }
 
-    private void BecomeChad()
-    {
+    private void BecomeChad() {
         targetHighpassMusic = -10f;
         targetPitchMusic = 1.05f;
         isChad = true;
     }
 
-    private void BecomeVirgin()
-    {
+    private void BecomeVirgin() {
         targetHighpassMusic = -80f;
         targetPitchMusic = 1f;
         isChad = false;
     }
 
-
-    private void Awake()
-    {
+    private void Awake() {
         if (instance != null)
             Destroy(instance);
         instance = this;
     }
 
-    private void Update()
-    {
+    private void Update() {
         if (!alive) return;
 
         hunger = Mathf.Clamp01(hunger);
         if (hunger == 0) Die();
-        progressBar.value = Mathf.Lerp(progressBar.value, hunger, Time.deltaTime * 10f); //update hunger preview
+        GameUI.Instance.SetHunger(hunger);
+        hunger -= hungerSpeed * Time.deltaTime; // calculate hunger
 
         if (chadTimer <= 0)
             BecomeVirgin();
@@ -86,21 +78,16 @@ public class Player : MonoBehaviour
             chadTimer -= Time.deltaTime;
 
         timeFromLastKeypress += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-        {
-            if (Mathf.Abs(timeFromLastKeypress - AudioController.instance.beatEvery) < AudioController.instance.accuracy)
-            {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) {
+            if (Mathf.Abs(timeFromLastKeypress - AudioController.instance.beatEvery) < AudioController.instance.accuracy) {
                 beatCombo++;
-                if (beatCombo > 1)
-                {
+                if (beatCombo > 1) {
                     status.Text($"To the beat! <align=\"right\"><size=22>{beatCombo}x");
                     Score(beatCombo);
                 }
 
 
-            }
-            else
-            {
+            } else {
                 beatCombo = 0;
             }
 
@@ -120,10 +107,8 @@ public class Player : MonoBehaviour
 
         }
 
+        input = Vector3.ClampMagnitude(input, 1);
         movementVector = input * speed * Time.deltaTime;
-
-
-        if (input.magnitude > 1) movementVector /= input.magnitude; //make the vector always smaller then one, so that diagonal movement doesn't cause it to go quicker
 
         //camera zoom
         //Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, (movementVector / Time.deltaTime).magnitude * cameraZoomFX + 5, Time.deltaTime * 2.5f);
@@ -140,13 +125,9 @@ public class Player : MonoBehaviour
         mixerGroup.SetFloat("Pitch", Mathf.Lerp(_, targetPitchMusic, Time.deltaTime * 10f));
 
         transform.Translate(movementVector); // movement
-
-        hunger -= hungerSpeed * Time.deltaTime; // calculate hunger
-
     }
 
-    public void Die()
-    {
+    public void Die() {
         GameManager.instance.Score(score);
         deathPanel.SetActive(true);
         alive = false;
@@ -156,15 +137,12 @@ public class Player : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
-    public void Bop()
-    {
+    public void Bop() {
 
     }
 
-    public void Score(long amount)
-    {
+    public void Score(long amount) {
         score += amount;
-        if (score.ToString() != scoreText.GetComponent<TextMeshProUGUI>().text)
-            scoreText.Text(score.ToString("0000"));
+        GameUI.Instance.Score(score);
     }
 }

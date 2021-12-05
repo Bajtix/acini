@@ -1,8 +1,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using ElRaccoone.Tweens;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     #region Singleton 
 
     public static GameManager instance;
@@ -13,31 +13,26 @@ public class GameManager : MonoBehaviour
     public string username;
 
 
-    public void Score(long result)
-    {
+    public void Score(long result) {
         score = result;
-        if (score > highscore)
-        {
+        if (score > highscore) {
             highscore = score;
         }
         if (Application.platform != RuntimePlatform.WebGLPlayer)
             PlayerPrefs.SetString("hs", highscore.ToString());
     }
 
-    private void Awake()
-    {
+    private void Awake() {
         instance = this;
-        if (Application.platform != RuntimePlatform.WebGLPlayer)
-        {
+        if (Application.platform != RuntimePlatform.WebGLPlayer) {
             string s = PlayerPrefs.GetString("hs");
             if (!string.IsNullOrEmpty(s))
                 highscore = long.Parse(s);
         }
     }
 
-    public void LoadGame()
-    {
+    public void LoadGame() {
         Fade.our.FadeIn();
-        LeanTween.delayedCall(0.2f, () => SceneManager.LoadScene(1));
+        gameObject.DelayedInvoke(0.2f, () => SceneManager.LoadScene(1));
     }
 }
