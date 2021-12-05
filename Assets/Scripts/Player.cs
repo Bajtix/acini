@@ -56,16 +56,17 @@ public class Player : MonoBehaviour {
     }
 
     public void Bop() {
-
+        // happens on interactions with food or enemies, for now unused
     }
 
     public void Damage(float nut) {
         hunger -= nut;
-
+        GameUI.Instance.BopHunger();
     }
 
     public void Eat(float nut) {
         hunger += nut;
+        GameUI.Instance.BopHunger();
     }
 
     public void Score(long amount) {

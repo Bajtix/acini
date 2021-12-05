@@ -6,6 +6,5 @@ public class ChadFood : Food {
     public override void Eat() {
         Player.Instance.Chad(10);
         base.Eat();
-
     }
 }

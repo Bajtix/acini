@@ -6,12 +6,15 @@ public class AniText : MonoBehaviour {
 
     private TextMeshProUGUI textMeshPro;
 
+    public bool isText = true;
+
     protected virtual void Awake() {
         textMeshPro = GetComponent<TextMeshProUGUI>();
     }
 
     public virtual void Animate(string text) {
-        textMeshPro.text = text;
+        if (!isText)
+            textMeshPro.text = text;
     }
 
 
