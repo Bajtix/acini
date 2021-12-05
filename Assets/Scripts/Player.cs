@@ -5,33 +5,29 @@ using UnityEngine;
 using UnityEngine.Audio;
 //this code is fucking cursed
 public class Player : MonoBehaviour {
+
+    #region Singleton 
+    private static Player instance;
+    public static Player Instance {
+        get {
+            if (instance == null) instance = GameObject.FindObjectOfType<Player>();
+            return instance;
+        }
+    }
+    #endregion
+
     public long score = 0;
     public float speed = 5f;
     public float hunger = 1f;
     public bool alive = true;
-    public float hungerSpeed = 0.01f;
-    public static Player instance;
+    public float hungerDrain = 0.055f;
+    public bool isChad = false;
+    public PlayerVFX fx;
 
-    private float timeFromLastKeypress = 0;
 
     private Vector2 movementVector = Vector2.zero;
     private Vector2 input = Vector2.zero;
-
-    public int beatCombo = 0;
-
-    private Color backgroundColor = Color.black;
-
-    public float chadTimer = 0;
-
-    public bool isChad = false;
-
-    private float targetHighpassMusic = -80f;
-    private float targetPitchMusic = 1f;
-
-    public ParticleSystem particles;
-
-
-    public AudioMixer mixerGroup;
+    private float chadTimer = 0;
 
     public void Chad(float dur) {
         chadTimer = dur;
@@ -39,76 +35,13 @@ public class Player : MonoBehaviour {
     }
 
     private void BecomeChad() {
-        targetHighpassMusic = -10f;
-        targetPitchMusic = 1.05f;
         isChad = true;
+        fx.BecomeChad();
     }
 
     private void BecomeVirgin() {
-        targetHighpassMusic = -80f;
-        targetPitchMusic = 1f;
         isChad = false;
-    }
-
-    private void Awake() {
-        if (instance != null)
-            Destroy(instance);
-        instance = this;
-    }
-
-    private void Update() {
-        if (!alive) return;
-
-        hunger = Mathf.Clamp01(hunger);
-        if (hunger == 0) Die();
-        GameUI.Instance.SetHunger(hunger);
-        hunger -= hungerSpeed * Time.deltaTime; // calculate hunger
-
-        if (chadTimer <= 0)
-            BecomeVirgin();
-        else
-            chadTimer -= Time.deltaTime;
-
-        timeFromLastKeypress += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) {
-            if (Mathf.Abs(timeFromLastKeypress - AudioController.instance.beatEvery) < AudioController.instance.accuracy) {
-                beatCombo++;
-                if (beatCombo > 1) {
-                    GameUI.Instance.AnnouncePoints("To the beat!", beatCombo);
-                    Score(beatCombo);
-                }
-
-
-            } else {
-                beatCombo = 0;
-            }
-
-            timeFromLastKeypress = 0;
-
-            input = new Vector2(0, 0);
-
-            if (Input.GetKeyDown(KeyCode.W))
-                input.y = 1;
-            if (Input.GetKeyDown(KeyCode.S))
-                input.y = -1;
-            if (Input.GetKeyDown(KeyCode.A))
-                input.x = -1;
-            if (Input.GetKeyDown(KeyCode.D))
-                input.x = 1;
-
-
-        }
-
-        input = Vector3.ClampMagnitude(input, 1);
-        movementVector = input * speed * Time.deltaTime;
-
-        float _;
-        mixerGroup.GetFloat("Highpass", out _);
-        mixerGroup.SetFloat("Highpass", Mathf.Lerp(_, targetHighpassMusic, Time.deltaTime * 10f));
-        mixerGroup.GetFloat("Pitch", out _);
-        mixerGroup.SetFloat("Pitch", Mathf.Lerp(_, targetPitchMusic, Time.deltaTime * 10f));
-
-        transform.Translate(movementVector); // movement
+        fx.BecomeVirgin();
     }
 
     public void Die() {
@@ -118,7 +51,7 @@ public class Player : MonoBehaviour {
         alive = false;
         Time.timeScale = 0.2f;
 
-        particles.Play();
+        fx.Death();
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -138,5 +71,35 @@ public class Player : MonoBehaviour {
     public void Score(long amount) {
         score += amount;
         GameUI.Instance.Score(score);
+    }
+
+    public void SetInput(Vector2 input) {
+        input.x = Mathf.Round(input.x);
+        input.y = Mathf.Round(input.y);
+        if (input.magnitude <= 0.05f) {
+            input = Vector2.up; // dont stop!
+        }
+        this.input = input.normalized;
+    }
+
+    private void Update() {
+        if (!alive) return;
+
+        hunger = Mathf.Clamp01(hunger);
+        if (hunger == 0) Die();
+        GameUI.Instance.SetHunger(hunger);
+        hunger -= hungerDrain * Time.deltaTime; // calculate hunger
+
+        if (chadTimer <= 0) {
+            fx.WhileVirgin();
+            if (isChad) BecomeVirgin();
+        } else {
+            chadTimer -= Time.deltaTime;
+            fx.WhileChad(chadTimer);
+        }
+
+        movementVector = input * speed * Time.deltaTime;
+
+        transform.Translate(movementVector); // movement
     }
 }

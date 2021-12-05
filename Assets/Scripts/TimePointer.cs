@@ -19,19 +19,19 @@ public class TimePointer : MonoBehaviour {
     public int achievementCount = 1;
 
     private void Update() {
-        if (Player.instance.alive) {
+        if (Player.Instance.alive) {
             timer += Time.deltaTime;
 
             nextTimeAchievement -= Time.deltaTime;
         }
         if (nextTimeAchievement <= 0) {
-            Player.instance.Score(nextPoints);
+            Player.Instance.Score(nextPoints);
             GameUI.Instance.AnnouncePoints("Survival", nextPoints);
 
             nextPoints = (long)System.Math.Pow(2, achievementCount);
             achievementCount++;
             nextTimeAchievement = 2 * achievementCount;
-            Player.instance.hungerSpeed += 0.005f;
+            Player.Instance.hungerDrain += 0.005f;
         }
     }
 

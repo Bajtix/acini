@@ -27,15 +27,15 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void OnTriggerEnter2D(Collider2D collider2D) {
         if (collider2D.CompareTag("Player")) {
-            Player.instance.Bop();
-            if (Player.instance.isChad) {
-                Player.instance.Eat(hungerReward);
-                Player.instance.Score(scoreReward);
+            Player.Instance.Bop();
+            if (Player.Instance.isChad) {
+                Player.Instance.Eat(hungerReward);
+                Player.Instance.Score(scoreReward);
                 GameUI.Instance.AnnouncePoints("Hunter", scoreReward);
                 Die();
             } else {
-                Player.instance.Damage(hungerDamage);
-                Player.instance.Score(-scoreDamage);
+                Player.Instance.Damage(hungerDamage);
+                Player.Instance.Score(-scoreDamage);
                 if (dieOnHit)
                     Die();
             }

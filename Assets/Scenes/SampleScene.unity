@@ -11459,6 +11459,7 @@ GameObject:
   - component: {fileID: 1767925981}
   - component: {fileID: 1767925984}
   - component: {fileID: 1767925985}
+  - component: {fileID: 1767925986}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11482,12 +11483,9 @@ MonoBehaviour:
   speed: 15
   hunger: 1
   alive: 1
-  hungerSpeed: 0.06
-  beatCombo: 0
-  chadTimer: 0
+  hungerDrain: 0.055
   isChad: 0
-  particles: {fileID: 206033302}
-  mixerGroup: {fileID: 24100000, guid: 1265ce2fdfd0c75b39eaa66a6ce34921, type: 2}
+  fx: {fileID: 1767925986}
 --- !u!212 &1767925982
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11596,6 +11594,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1767925986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767925980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3ef5064164e23e1960d43828df58f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chadBgColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+  deathParticles: {fileID: 206033302}
 --- !u!1 &1901959916
 GameObject:
   m_ObjectHideFlags: 0

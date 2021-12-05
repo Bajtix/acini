@@ -31,8 +31,8 @@ public class Food : MonoBehaviour {
     }
 
     public virtual void Eat() {
-        Player.instance.Bop();
-        Player.instance.Eat(nutrienValue);
-        Player.instance.Score(pointValue);
+        Player.Instance.Bop();
+        Player.Instance.Eat(nutrienValue);
+        Player.Instance.Score(pointValue);
     }
 }
