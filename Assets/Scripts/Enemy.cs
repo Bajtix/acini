@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour {
     public float speed = 10f;
     public float hungerDamage;
     public int scoreDamage;
@@ -17,32 +16,25 @@ public class Enemy : MonoBehaviour
     public ParticleSystem particles;
 
 
-    protected virtual void Start()
-    {
+    protected virtual void Start() {
         StartCoroutine(DestroySelf());
     }
 
-    private IEnumerator DestroySelf()
-    {
+    private IEnumerator DestroySelf() {
         yield return new WaitForSeconds(aliveTime);
         Die();
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collider2D)
-    {
-        if (collider2D.CompareTag("Player"))
-        {
+    protected virtual void OnTriggerEnter2D(Collider2D collider2D) {
+        if (collider2D.CompareTag("Player")) {
             Player.instance.Bop();
-            if (Player.instance.isChad)
-            {
-                Player.instance.hunger += hungerReward;
+            if (Player.instance.isChad) {
+                Player.instance.Eat(hungerReward);
                 Player.instance.Score(scoreReward);
-                Player.instance.status.Text($"Hunter!<br><align=\"right\"><size=22>{scoreReward}x");
+                GameUI.Instance.AnnouncePoints("Hunter", scoreReward);
                 Die();
-            }
-            else
-            {
-                Player.instance.hunger -= hungerDamage;
+            } else {
+                Player.instance.Damage(hungerDamage);
                 Player.instance.Score(-scoreDamage);
                 if (dieOnHit)
                     Die();
@@ -52,10 +44,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected virtual void Die()
-    {
-        if (particles != null)
-        {
+    protected virtual void Die() {
+        if (particles != null) {
             particles.transform.SetParent(null);
             particles.Play();
         }

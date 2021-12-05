@@ -1,5 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
+using ElRaccoone.Tweens;
+using TMPro;
 
 public class GameUI : MonoBehaviour {
 
@@ -17,6 +19,8 @@ public class GameUI : MonoBehaviour {
     public Slider hungerBar;
     public AniText scoreText;
 
+    public AniText scoreAnnouncer;
+
     private float hungerTarget;
 
     public void SetHunger(float hunger) {
@@ -29,16 +33,24 @@ public class GameUI : MonoBehaviour {
 
     public void Score(long score) {
         if (score.ToString("0000") != scoreText.GetText())
-            scoreText.Text(score.ToString("0000"));
+            scoreText.Animate(score.ToString("0000"));
     }
 
     public void Die() {
+        deathPanel.gameObject.SetActive(true);
+        deathPanel.TweenCanvasGroupAlpha(1, 0.04f).SetFrom(0);
+    }
 
+    public void AnnouncePoints(string name, long bonus) {
+        var txt = Instantiate(scoreAnnouncer.gameObject, transform).GetComponent<AniText>();
+        txt.Animate($"{name}<br><align=\"right\"><size=22>{bonus}x");
+        Destroy(txt, 5f);
     }
 
     private void Update() {
         //update hunger bar
         hungerBar.value = Mathf.Lerp(hungerBar.value, hungerTarget, Time.deltaTime * 10f); //update hunger preview
     }
+
 
 }

@@ -12,20 +12,12 @@ public class Player : MonoBehaviour {
     public float hungerSpeed = 0.01f;
     public static Player instance;
 
-    public UnityEngine.UI.Slider progressBar;
-
     private float timeFromLastKeypress = 0;
 
     private Vector2 movementVector = Vector2.zero;
     private Vector2 input = Vector2.zero;
 
     public int beatCombo = 0;
-    public AniText status;
-    public AniText scoreText;
-
-    public GameObject deathPanel;
-
-
 
     private Color backgroundColor = Color.black;
 
@@ -82,7 +74,7 @@ public class Player : MonoBehaviour {
             if (Mathf.Abs(timeFromLastKeypress - AudioController.instance.beatEvery) < AudioController.instance.accuracy) {
                 beatCombo++;
                 if (beatCombo > 1) {
-                    status.Text($"To the beat! <align=\"right\"><size=22>{beatCombo}x");
+                    GameUI.Instance.AnnouncePoints("To the beat!", beatCombo);
                     Score(beatCombo);
                 }
 
@@ -110,14 +102,6 @@ public class Player : MonoBehaviour {
         input = Vector3.ClampMagnitude(input, 1);
         movementVector = input * speed * Time.deltaTime;
 
-        //camera zoom
-        //Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, (movementVector / Time.deltaTime).magnitude * cameraZoomFX + 5, Time.deltaTime * 2.5f);
-        if (!isChad)
-            backgroundColor = Color.HSVToRGB((Mathf.Abs(transform.position.magnitude) / 100f) % 1, 0.25f, 0.227f);
-        else
-            backgroundColor = new Color(Random.Range(0, .5f), Random.Range(0, .5f), Random.Range(0, .5f));
-
-        Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, backgroundColor, Time.deltaTime * 5f);
         float _;
         mixerGroup.GetFloat("Highpass", out _);
         mixerGroup.SetFloat("Highpass", Mathf.Lerp(_, targetHighpassMusic, Time.deltaTime * 10f));
@@ -128,8 +112,9 @@ public class Player : MonoBehaviour {
     }
 
     public void Die() {
-        GameManager.instance.Score(score);
-        deathPanel.SetActive(true);
+        GameManager.instance?.Score(score);
+        GameUI.Instance.Die();
+
         alive = false;
         Time.timeScale = 0.2f;
 
@@ -139,6 +124,15 @@ public class Player : MonoBehaviour {
 
     public void Bop() {
 
+    }
+
+    public void Damage(float nut) {
+        hunger -= nut;
+
+    }
+
+    public void Eat(float nut) {
+        hunger += nut;
     }
 
     public void Score(long amount) {
