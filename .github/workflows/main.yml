@@ -140,6 +140,7 @@ jobs:
           name: build-StandaloneLinux64
           path: build/StandaloneLinux64
   buildWebGL:
+    needs: testRunner
     name: Build for WebGL 🖥️
     runs-on: ubuntu-latest
     strategy:
