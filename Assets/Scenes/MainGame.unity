@@ -919,7 +919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000091552734, y: 48.49}
+  m_AnchoredPosition: {x: -0.000091552734, y: 48.490005}
   m_SizeDelta: {x: 372.34, y: 2.97}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299448425
@@ -6570,32 +6570,32 @@ MonoBehaviour:
     duration: 5
     gameTime: 0
   - gameEvent: {fileID: 11400000, guid: 4c6c67efa4af04dd5b1dce8c4748cbde, type: 2}
-    duration: 10
+    duration: 20
     gameTime: 5
   - gameEvent: {fileID: 11400000, guid: 2b7bd4b82e4b17bf2ac09b4b9b634c3c, type: 2}
     duration: 20
-    gameTime: 15
+    gameTime: 25
   - gameEvent: {fileID: 11400000, guid: 6fd33f9f232804d41adf02392cb30594, type: 2}
     duration: 20
-    gameTime: 35
+    gameTime: 45
   - gameEvent: {fileID: 11400000, guid: bb28e1ef6769b4f0585f55aadc51768f, type: 2}
     duration: 40
-    gameTime: 55
+    gameTime: 65
   - gameEvent: {fileID: 11400000, guid: ecc838fe96884e9c6a5c07c31285cf2f, type: 2}
     duration: 80
-    gameTime: 95
+    gameTime: 105
   - gameEvent: {fileID: 11400000, guid: 7ec188851e8b6d559b1748cae2628c75, type: 2}
     duration: 60
-    gameTime: 175
+    gameTime: 185
   - gameEvent: {fileID: 11400000, guid: 48a0e7dbded3bf252996f8abc4275520, type: 2}
     duration: 100
-    gameTime: 235
+    gameTime: 245
   - gameEvent: {fileID: 11400000, guid: 94f10dc129f9d24dbb5efab4857f5d3b, type: 2}
     duration: 60
-    gameTime: 335
+    gameTime: 345
   - gameEvent: {fileID: 11400000, guid: ecc838fe96884e9c6a5c07c31285cf2f, type: 2}
     duration: 600
-    gameTime: 335
+    gameTime: 405
   gameTime: 0
   currentGoal: 0
 --- !u!1 &656592948
@@ -12541,7 +12541,7 @@ MonoBehaviour:
   speed: 15
   hunger: 1
   alive: 1
-  hungerDrain: 0.055
+  hungerDrain: 0.062
   isChad: 0
   fx: {fileID: 1767925986}
   curse: {fileID: 1767925988}
