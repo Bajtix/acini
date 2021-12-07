@@ -3,6 +3,7 @@ using ElRaccoone.Tweens;
 
 public class BopAniText : AniText {
     public override void Animate(string text) {
+        if (!IsNew(text)) return;
         base.Animate(text);
 
         gameObject.TweenLocalScale(new Vector3(1.2f, 1.2f, 1.2f), 0.05f).SetOnComplete(() => {

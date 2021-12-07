@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597d51b274710a473bbcd94da414a7a3, type: 3}
+  m_Name: 01 Food
+  m_EditorClassIdentifier: 
+  title: Let's begin!
+  executed: 0
+  type: 0
+  entries_a:
+  - name: def_food
+    gameObject: {fileID: 2665368406022417305, guid: 9fb2df4198db1f4e4a42d03798cb7479, type: 3}
+    interval: {x: 0.1, y: 1}
+    next: 0.48812968
+  entries_r: []
