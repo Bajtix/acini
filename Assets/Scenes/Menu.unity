@@ -10616,8 +10616,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -176.99}
-  m_SizeDelta: {x: 692.95, y: 30.2377}
+  m_AnchoredPosition: {x: 400, y: -189.66}
+  m_SizeDelta: {x: 692.95, y: 55.57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1507331232
 MonoBehaviour:
@@ -10639,7 +10639,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: update 2, bitches!
+  m_text: 'i added dicks :)
+
+    <size=15>update 3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc043e701b7c0804ca717a222baa1291, type: 2}
   m_sharedMaterial: {fileID: -6080967475536343150, guid: cc043e701b7c0804ca717a222baa1291, type: 2}
@@ -10674,7 +10676,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
