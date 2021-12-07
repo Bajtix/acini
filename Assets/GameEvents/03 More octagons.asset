@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 597d51b274710a473bbcd94da414a7a3, type: 3}
-  m_Name: 02 Basic enemies
+  m_Name: 03 More octagons
   m_EditorClassIdentifier: 
-  title: Octagon Bois
+  title: like a chad
   executed: 0
   type: 0
   entries_a:
   - name: def_octagon
     gameObject: {fileID: 8748112494839733914, guid: b27e8847c9641b0a78f054cd85cbc5aa, type: 3}
-    interval: {x: 1, y: 2}
+    interval: {x: 0.5, y: 1}
+    next: 0.35951585
+  - name: def_chad food
+    gameObject: {fileID: 2665368406022417305, guid: 51072a072ccc635b8b61d793798f501f, type: 3}
+    interval: {x: 3, y: 5}
     next: 0.35951585
   entries_r: []

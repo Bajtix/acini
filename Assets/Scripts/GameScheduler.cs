@@ -31,7 +31,7 @@ public class GameScheduler : MonoBehaviour {
         Sort();
 
         for (int i = 0; i < list.Length; i++) {
-            list[i].gameEvent = Instantiate(list[i].gameEvent);
+            list[i].gameEvent = Instantiate(list[i].gameEvent); // clone them so they are runtime only (for editor safety/convinience)
         }
     }
 

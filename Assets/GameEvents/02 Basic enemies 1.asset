@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597d51b274710a473bbcd94da414a7a3, type: 3}
   m_Name: 02 Basic enemies 1
   m_EditorClassIdentifier: 
-  title: Octagon Bois
+  title: you are (not) alone
   executed: 0
   type: 0
   entries_a:
