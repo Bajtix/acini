@@ -180,7 +180,7 @@ jobs:
         with:
           name: build-WebGL
           path: build/WebGL
-deployPages:
+  deployPages:
     needs: buildWebGL
     name: deploy github pages page
     runs-on: ubuntu-latest
