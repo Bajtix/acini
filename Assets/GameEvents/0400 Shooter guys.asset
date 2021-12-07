@@ -10,14 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 597d51b274710a473bbcd94da414a7a3, type: 3}
-  m_Name: 02 Basic enemies 1
+  m_Name: 0400 Shooter guys
   m_EditorClassIdentifier: 
-  title: you are (not) alone
+  title: pew? pew my ass
+  pointReward: 25
   executed: 0
   type: 0
   entries_a:
   - name: def_octagon
-    gameObject: {fileID: 8748112494839733914, guid: b27e8847c9641b0a78f054cd85cbc5aa, type: 3}
-    interval: {x: 1, y: 2}
+    gameObject: {fileID: 8748112494839733914, guid: d14dc63e8f9a475c0ab4cb52026c6d2c, type: 3}
+    interval: {x: 8, y: 20}
+    next: 0.35951585
+  - name: def_speed food
+    gameObject: {fileID: 2665368406022417305, guid: 2542aebcd92e90ab4ac6dff8d9224516, type: 3}
+    interval: {x: 3, y: 5}
     next: 0.35951585
   entries_r: []

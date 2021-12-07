@@ -8,6 +8,7 @@ public class PlayerVFX : MonoBehaviour {
     public Color chadBgColor;
     public ParticleSystem deathParticles;
     public AudioMixer mixer;
+    public float normalFov = 12, chadFov = 20;
     public Cinemachine.CinemachineVirtualCamera cam;
 
 
@@ -23,12 +24,12 @@ public class PlayerVFX : MonoBehaviour {
 
     public void BecomeChad() {
         mixer.FindSnapshot("Chad").TransitionTo(0.5f);
-        gameObject.TweenValueFloat(15, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(10);
+        gameObject.TweenValueFloat(chadFov, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(normalFov);
     }
 
     public void BecomeVirgin() {
         mixer.FindSnapshot("Default").TransitionTo(0.5f);
-        gameObject.TweenValueFloat(10, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(15);
+        gameObject.TweenValueFloat(normalFov, 1, (w) => cam.m_Lens.OrthographicSize = w).SetFrom(chadFov);
     }
 
     public void WhileChad(float timer) {

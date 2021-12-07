@@ -32,6 +32,8 @@ public class SwarmEnemy : SyncedEnemy {
             w.Initialize(this); // i am their master, they shall listen to me and me only!
             swarm.Add(w);
         }
+
+        transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
     }
 
     public void MasterImDead(SwarmSubEnemy me) {

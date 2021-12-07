@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 597d51b274710a473bbcd94da414a7a3, type: 3}
-  m_Name: 03 More octagons
+  m_Name: 0300 More octagons
   m_EditorClassIdentifier: 
   title: like a chad
+  pointReward: 20
   executed: 0
   type: 0
   entries_a:

@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  hungerDamage: 0.08
+  hungerDamage: 0.04
   scoreDamage: 0
   hungerReward: 0
   scoreReward: 0

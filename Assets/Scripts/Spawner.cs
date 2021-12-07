@@ -15,7 +15,8 @@ public class Spawner : MonoBehaviour {
 
     private Dictionary<string, SpawnerEntry> spawnables;
 
-    public float spawnRadius = 50f;
+    public float spawnRadius = 100f;
+    public float scale = 2f;
 
     private void Awake() {
         spawnables = new Dictionary<string, SpawnerEntry>();
@@ -36,7 +37,7 @@ public class Spawner : MonoBehaviour {
 
     private void Update() {
         foreach (var v in spawnables.Values) {
-            if (v.ShouldSpawn(Time.deltaTime)) {
+            if (v.ShouldSpawn(Time.deltaTime * scale)) {
                 Instantiate(v.gameObject, GetRandomPosition(), Quaternion.identity);
             }
         }

@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class StageDisplay : MonoBehaviour {
     public AniText text;
-    public UnityEngine.UI.Slider bar;
+    public UnityEngine.UI.Slider[] bars;
 
     private void Update() {
-        bar.value = GameScheduler.Instance.GetProgress();
+        foreach (var bar in bars)
+            bar.value = GameScheduler.Instance.GetProgress();
         text.Animate(GameScheduler.Instance.GetLastEvent()?.gameEvent.title);
     }
 }

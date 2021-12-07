@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameScheduler : MonoBehaviour {
 
@@ -18,6 +19,8 @@ public class GameScheduler : MonoBehaviour {
     [System.Serializable]
     public class MGameEvent {
         public GameEvent gameEvent;
+        public float duration;
+        [ReadOnly]
         public float gameTime;
     }
 
@@ -26,6 +29,15 @@ public class GameScheduler : MonoBehaviour {
     public float gameTime;
     public int currentGoal;
 
+
+    private float CalculateGT(int i) {
+        float r = 0;
+        for (int j = 0; j < i; j++) {
+            r += list[j].duration;
+        }
+
+        return r;
+    }
 
     private void Start() {
         Sort();
@@ -38,9 +50,9 @@ public class GameScheduler : MonoBehaviour {
     public float GetProgress() {
         if (currentGoal == 0 || currentGoal >= list.Length) return 0;
         float t1 = list[currentGoal - 1].gameTime;
-        float t2 = list[currentGoal].gameTime;
+        float t2 = list[currentGoal].duration;
 
-        return (gameTime - t1) / (t2 - t1);
+        return (gameTime - t1) / t2;
     }
 
     public MGameEvent GetLastEvent() {
@@ -56,15 +68,30 @@ public class GameScheduler : MonoBehaviour {
     [Button("Sort")]
     private void Sort() {
         Array.Sort(list, (a, b) => Mathf.RoundToInt(a.gameTime * 100 - b.gameTime * 100));
+
+        for (int i = 0; i < list.Length; i++) {
+            list[i].gameTime = CalculateGT(i);
+        }
+    }
+
+    private void PointReward() {
+        if (currentGoal < 0 || currentGoal >= list.Length) return;
+        int pts = list[currentGoal].gameEvent.pointReward;
+        Player.Instance.Score(pts);
+        GameUI.Instance.AnnouncePoints("Survival", pts);
     }
 
     private void Update() {
-        gameTime += Time.deltaTime;
+        if (Player.Instance.alive)
+            gameTime += Time.deltaTime;
 
         foreach (var v in list) { // TODO: can possibly be simplified as the array is sorted
             if (v.gameEvent.executed == false && v.gameTime <= gameTime) {
+                PointReward();
+
                 currentGoal++;
                 v.gameEvent.Execute();
+
 
             }
         }
