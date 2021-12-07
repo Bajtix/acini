@@ -50,9 +50,9 @@ public class GameScheduler : MonoBehaviour {
     public float GetProgress() {
         if (currentGoal == 0 || currentGoal >= list.Length) return 0;
         float t1 = list[currentGoal - 1].gameTime;
-        float t2 = list[currentGoal].duration;
+        float t2 = list[currentGoal].gameTime;
 
-        return (gameTime - t1) / t2;
+        return (gameTime - t1) / (t2 - t1);
     }
 
     public MGameEvent GetLastEvent() {
