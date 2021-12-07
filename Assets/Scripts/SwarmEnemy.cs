@@ -1,10 +1,25 @@
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class SwarmEnemy : SyncedEnemy {
     public SwarmSubEnemy swarmSub;
     public List<Vector2> shape;
     public float scale = 1f;
+
+    public string pointInput;
+
+    [NaughtyAttributes.Button("Import")]
+    private void Import() {
+        string[] lines = pointInput.Split(';');
+        foreach (var l in lines) {
+            string x = l.Split(',')[0];
+            string y = l.Split(',')[1];
+
+            Vector2 p = new Vector2(float.Parse(x, CultureInfo.InvariantCulture), float.Parse(y, CultureInfo.InvariantCulture));
+            shape.Add(p);
+        }
+    }
 
     private int frame;
     private List<SwarmSubEnemy> swarm;
@@ -22,6 +37,7 @@ public class SwarmEnemy : SyncedEnemy {
     public void MasterImDead(SwarmSubEnemy me) {
         swarm.Remove(me);
         if (swarm.Count == 0) {
+            GameUI.Instance.AnnouncePoints("Swarm killed", scoreReward);
             Die();
         }
     }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8748112494839733913}
   - component: {fileID: 2766124205321005246}
+  - component: {fileID: 7637241023962699374}
   m_Layer: 0
   m_Name: StarSwarm
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MonoBehaviour:
   hungerDamage: 0
   scoreDamage: 0
   hungerReward: 0
-  scoreReward: 0
+  scoreReward: 250
   aliveTime: 60
   dieOnHit: 1
   particles: {fileID: 0}
@@ -63,6 +64,27 @@ MonoBehaviour:
   - {x: 4.911, y: -0.925}
   - {x: -3.338, y: 4.432}
   scale: 0.5
+--- !u!114 &7637241023962699374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748112494839733914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6baa0209b3148580b990e8eb106eeb25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  component: {fileID: 2766124205321005246}
+  field: Scale
+  singleMin: 0.2
+  singleMax: 0.8
+  vectorMin: {x: 0, y: 0}
+  vectorMax: {x: 0, y: 0}
+  integerMin: 0
+  integerMax: 0
 --- !u!1001 &7246979816210926111
 PrefabInstance:
   m_ObjectHideFlags: 0
